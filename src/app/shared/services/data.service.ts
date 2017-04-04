@@ -6,10 +6,10 @@ import {Observer} from 'rxjs/Observer';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { IUser, ISchedule, IScheduleDetails, Pagination, PaginatedResult } from '../interfaces';
+import {  ISchedule, IScheduleDetails, Pagination, PaginatedResult } from '../interfaces';
 import { ItemsService } from '../utils/items.service';
 import { ConfigService } from '../utils/config.service';
-
+import { IUser } from '../IUser';
 @Injectable()
 export class DataService {
 
@@ -145,6 +145,21 @@ export class DataService {
             .catch(this.handleError);
     }
 
+    createSchedule(schedule: ISchedule): Observable<ISchedule> {
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        return this.http.post(this._baseUrl + 'schedules' , JSON.stringify(schedule), {
+            headers: headers
+        })
+            .map((res: Response) => {
+                return;
+            })
+            .catch(this.handleError);
+    }
+
+
     deleteSchedule(id: number): Observable<void> {
         return this.http.delete(this._baseUrl + 'schedules/' + id)
             .map((res: Response) => {
@@ -162,7 +177,17 @@ export class DataService {
             .catch(this.handleError);
     }
 
-    private handleError(error: any) {
+    addScheduleAttendee(id: number, attendee: number) {
+
+        return this.http.get(this._baseUrl + 'schedules/' + id + '/addattendee/' + attendee)
+            .map((res: Response) => {
+                return;
+            })
+            .catch(this.handleError);
+    }
+
+
+     private handleError(error: any) {
         var applicationError = error.headers.get('Application-Error');
         var serverError = error.json();
         var modelStateErrors: string = '';

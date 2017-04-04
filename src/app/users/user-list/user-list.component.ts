@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../shared/services/data.service';
 import { ItemsService } from '../../shared/utils/items.service';
 import { NotificationService } from '../../shared/utils/notification.service';
-import { IUser } from '../../shared/interfaces';
+import { IUser } from '../../shared/IUser';
 import { UserCardComponent } from '../user-card/user-card.component';
 
 @Component({

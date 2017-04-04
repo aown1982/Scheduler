@@ -18,8 +18,8 @@
 
     <button type="button" class="btn btn-danger" (click)="back()">
         <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>Back</button>
-    <button type="button" [disabled]="!editScheduleForm.form.valid" class="btn btn-default" (click)="updateSchedule(editScheduleForm)">
-        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Update</button>
+    <button type="button" [disabled]="!editScheduleForm.form.valid" class="btn btn-default" (click)="saveSchedule(editScheduleForm)">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Save</button>
 
     <hr/>
 
@@ -27,8 +27,12 @@
         <div class="row">
             <div class="col-md-4">
                 <label class="control-label"><i class="fa fa-user" aria-hidden="true"></i>Creator</label>
-                <input type="text" class="form-control" [(ngModel)]="schedule.creator" name="creator" #creator="ngModel" required pattern=".{5,50}"
-                    disabled />
+                <!--<input type="text" class="form-control" [(ngModel)]="schedule.creator" name="creator" #creator="ngModel" required pattern=".{5,50}"
+                         />-->
+
+                <select [disabled]="mode == 'edit'" class="form-control" [(ngModel)]="schedule.creatorId" name="creator" required #creator="ngModel">
+                        <option *ngFor="let user of users" [value]="user.id">{{user.name}}</option>
+                </select>
             </div>
 
             <div class="col-md-4">
@@ -91,13 +95,28 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th></th>
+                    <th>        <button [disabled]="schedule.id == 0" class="btn btn-primary" type="button" (click)="add()">Add Attendee</button>  </th>
                     <th><i class="fa fa-user" aria-hidden="true"></i>Name</th>
                     <th><i class="fa fa-linkedin-square" aria-hidden="true"></i>Profession</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
+                <tr *ngIf="addingUser">
+                    <td [style.valign]="'middle'">
+                        <img class="img-thumbnail img-small" src="" alt="addUser" />
+                    </td>
+                    <td>
+                        <select class="form-control" [(ngModel)]="userid" name="users">
+                        <option *ngFor="let user of users" [value]="user.id">{{user.name}}</option>
+                        </select>
+                        
+                    </td>
+                     <td [style.valign]="'middle'">
+                        <button type="button" class="btn btn-primary btn-sm" (click)="addAttendee()"><i class="fa fa-user-times" aria-hidden="true"></i>Add</button>
+                    </td>
+                </tr>
+        
                 <tr *ngFor="let attendee of schedule.attendees">
                     <td [style.valign]="'middle'">
                         <img class="img-thumbnail img-small" src="{{apiHost}}images/{{attendee.avatar}}" alt="attendee.name" />

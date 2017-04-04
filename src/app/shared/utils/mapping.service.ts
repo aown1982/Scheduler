@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { ISchedule, IScheduleDetails, IUser } from '../interfaces';
-import  { ItemsService } from './items.service'
-
+import { ISchedule, IScheduleDetails } from '../interfaces';
+import { ItemsService } from './items.service'
+import { IUser } from '../IUser';
 @Injectable()
 export class MappingService {
 

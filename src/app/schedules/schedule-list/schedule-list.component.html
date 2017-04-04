@@ -3,6 +3,8 @@
    <span class="badge">{{totalItems}}</span>
 </button>
 
+<a class="btn btn-primary pull-right" [routerLink]="['/schedules',0,'new']"><i class="fa fa-calendar" aria-hidden="true"></i>Add</a>
+
 <hr/>
 
 <div [@flyInOut]="'in'">
@@ -22,7 +24,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let schedule of schedules">
-                <td> {{schedule.title}}</td>
+                <td>{{schedule.title}}</td>
                 <td>{{schedule.creator}}</td>
                 <td>{{schedule.description}}</td>
                 <td>{{schedule.location}}</td>
@@ -31,7 +33,7 @@
                 <td><button class="btn btn-primary" (click)="viewScheduleDetails(schedule.id)">
             <i class="fa fa-info-circle" aria-hidden="true"></i>Details</button>
                 </td>
-                <td><a class="btn btn-primary" routerLink="['/schedules',schedule.id,'edit']"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</a></td>
+                <td><a class="btn btn-primary" [routerLink]="['/schedules',schedule.id,'edit']"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</a></td>
                 <td>
                     <button class="btn btn-danger" (click)="removeSchedule(schedule)"><i class="fa fa-trash" aria-hidden="true"></i>Delete</button>
                 </td>
@@ -48,8 +50,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" aria-label="Close" (click)="hideChildModal()">
-          <span aria-hidden="true">&times;</span>
-        </button>
+                <span aria-hidden="true">&times;</span>
+                </button>
                 <h4>{{scheduleDetails.title}} details</h4>
             </div>
             <div class="modal-body">
@@ -120,7 +122,7 @@
                             <tbody>
                                 <tr *ngFor="let attendee of scheduleDetails.attendees">
                                     <td [style.valign]="'middle'">
-                                        <img class="img-thumbnail img-small" src="{{apiHost}}images/{{attendee.avatar}}" alt="attendee.name" />
+                                        <img class="img-thumbnail img-small" [src]="apiHost + 'images/' + attendee.avatar" alt="attendee.name" />
                                     </td>
                                     <td [style.valign]="'middle'">{{attendee.name}}</td>
                                     <td [style.valign]="'middle'">{{attendee.profession}}</td>

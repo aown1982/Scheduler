@@ -12,7 +12,8 @@ import { ConfigService } from '../../shared/utils/config.service';
 import { HighlightDirective } from '../../shared/directives/highlight.directive';
 
 import { ModalDirective } from 'ng2-bootstrap';
-import { IUser, ISchedule } from '../../shared/interfaces';
+import {  ISchedule } from '../../shared/interfaces';
+import {  IUser } from '../../shared/IUser';
 
 @Component({
     selector: 'user-card',

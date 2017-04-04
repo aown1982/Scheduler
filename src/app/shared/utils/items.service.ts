@@ -11,11 +11,13 @@ export class ItemsService {
     /*
     Removes an item from an array using the lodash library
     */
+    
     removeItemFromArray<T>(array: Array<T>, item: any) {
         _.remove(array, function (current) {
             //console.log(current);
             return JSON.stringify(current) === JSON.stringify(item);
         });
+        
     }
 
     removeItems<T>(array: Array<T>, predicate: Predicate<T>) {
@@ -41,6 +43,11 @@ export class ItemsService {
     addItemToStart<T>(array: Array<T>, item: any) {
         array.splice(0, 0, item);
     }
+
+    addItemToEnd<T>(array: Array<T>, item: any) {
+        array.push(item);
+    }
+
 
     /*
     From an array of type T, select all values of type R for property

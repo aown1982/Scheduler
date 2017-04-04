@@ -1,5 +1,11 @@
-import { Component, OnInit, ViewChild, Input, Output, trigger, state, style, animate, transition } from '@angular/core';
-import { ModalDirective } from 'ng2-bootstrap';
+import { Component, OnInit, ViewChild, Input, Output,
+    trigger,
+    state,
+    style,
+    animate,
+    transition } from '@angular/core';
+
+import { ModalDirective, PaginationConfig } from 'ng2-bootstrap';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 import { DataService } from '../../shared/services/data.service';
@@ -10,6 +16,7 @@ import { ConfigService } from '../../shared/utils/config.service';
 import { ISchedule, IScheduleDetails, Pagination, PaginatedResult } from '../../shared/interfaces';
 
 @Component({
+    moduleId: module.id,
     selector: 'app-schedules',
     templateUrl: 'schedule-list.component.html',
     animations: [
@@ -36,9 +43,9 @@ export class ScheduleListComponent implements OnInit {
     schedules: ISchedule[];
     apiHost: string;
 
-    public itemsPerPage = 2;
-    public totalItems = 0;
-    public currentPage = 1;
+    public itemsPerPage: number = 2;
+    public totalItems: number = 0;
+    public currentPage: number = 1;
 
     // Modal properties
     @ViewChild('modal')
@@ -48,11 +55,11 @@ export class ScheduleListComponent implements OnInit {
     output: string;
     selectedScheduleId: number;
     scheduleDetails: IScheduleDetails;
-    selectedScheduleLoaded = false;
-    index = 0;
+    selectedScheduleLoaded: boolean = false;
+    index: number = 0;
     backdropOptions = [true, false, 'static'];
-    animation = true;
-    keyboard = true;
+    animation: boolean = true;
+    keyboard: boolean = true;
     backdrop: string | boolean = true;
 
     constructor(
@@ -60,22 +67,21 @@ export class ScheduleListComponent implements OnInit {
         private itemsService: ItemsService,
         private notificationService: NotificationService,
         private configService: ConfigService,
-        private loadingBarService: SlimLoadingBarService) { }
+        private loadingBarService:SlimLoadingBarService) { }
 
     ngOnInit() {
-
         this.apiHost = this.configService.getApiHost();
         this.loadSchedules();
     }
 
     loadSchedules() {
         this.loadingBarService.start();
+
         this.dataService.getSchedules(this.currentPage, this.itemsPerPage)
             .subscribe((res: PaginatedResult<ISchedule[]>) => {
-                this.schedules = res.result;
+                this.schedules = res.result;// schedules;
                 this.totalItems = res.pagination.TotalItems;
                 this.loadingBarService.complete();
-                console.log(this.schedules);
             },
             error => {
                 this.loadingBarService.complete();

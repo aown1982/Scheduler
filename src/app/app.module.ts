@@ -4,14 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import './rxjs-operators';
 
-import { PaginationModule  } from 'ng2-bootstrap';
+import { PaginationModule, DatepickerConfig } from 'ng2-bootstrap';
 import { DatepickerModule } from 'ng2-bootstrap';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { ModalModule } from 'ng2-bootstrap';
 import { ProgressbarModule } from 'ng2-bootstrap';
-import { TimepickerModule } from 'ng2-bootstrap';
+import { TimepickerModule, TimepickerConfig } from 'ng2-bootstrap';
 import { ComponentLoaderFactory } from 'ng2-bootstrap/component-loader';
-import { Positioning, PositioningService } from 'ng2-bootstrap/positioning'
+import { Positioning, PositioningService } from 'ng2-bootstrap/positioning';
 import { AppComponent } from './app.component';
 import { DateFormatPipe } from './shared/pipes/date-format.pipe';
 import { HighlightDirective } from './shared/directives/highlight.directive';
@@ -51,8 +51,8 @@ import { RouterModule } from '@angular/router';
         ProgressbarModule,
         PaginationModule.forRoot(),
         TimepickerModule,
-    RouterModule.forRoot(appRoutes),
-    SlimLoadingBarModule.forRoot() ],
+    SlimLoadingBarModule.forRoot(),
+     RouterModule.forRoot(appRoutes) ],
   providers: [
         ConfigService,
         DataService,
@@ -60,7 +60,9 @@ import { RouterModule } from '@angular/router';
         MappingService,
         NotificationService,
         ComponentLoaderFactory,
-        PositioningService
+        PositioningService,
+        DatepickerConfig,
+        TimepickerConfig
     ],
   bootstrap: [AppComponent]
 })

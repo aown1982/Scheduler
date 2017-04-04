@@ -9,6 +9,6 @@ import { ScheduleEditComponent } from './schedules/schedule-edit/schedule-edit.c
 export const appRoutes: Routes = [
     { path: 'users', component: UserListComponent },
     { path: 'schedules', component: ScheduleListComponent },
-    { path: 'schedules/:id/edit', component: ScheduleEditComponent },
+    { path: 'schedules/:id/:mode', component: ScheduleEditComponent },
     { path: '', component: HomeComponent }
 ];
